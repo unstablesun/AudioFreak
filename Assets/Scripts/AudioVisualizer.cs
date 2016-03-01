@@ -44,7 +44,7 @@ public class AudioVisualizer : MonoBehaviour
 		//The cubesTransform array should be initialized with the same length as the samples array
 		cubesTransform = new Transform[samples.Length];
 		//Center the audio visualization line at the X axis, according to the samples array length
-				goTransform.position = new Vector3(-(samples.Length/2) * Hscale, goTransform.position.y, goTransform.position.z);
+		goTransform.position = new Vector3(-(samples.Length/2) * Hscale, goTransform.position.y, goTransform.position.z);
 		
 		//Create a temporary GameObject, that will serve as a reference to the most recent cloned cube
 		GameObject tempCube;
@@ -53,12 +53,16 @@ public class AudioVisualizer : MonoBehaviour
 		for(int i=0; i<samples.Length;i++)
 		{
 			//Instantiate a cube placing it at the right side of the previous one
-						tempCube = (GameObject) Instantiate(cube, new Vector3(goTransform.position.x + (i * Hscale), goTransform.position.y, goTransform.position.z),Quaternion.identity);
+			tempCube = (GameObject) Instantiate(cube, new Vector3(goTransform.position.x + (i * Hscale), goTransform.position.y, goTransform.position.z),Quaternion.identity);
 			//Get the recently instantiated cube Transform component
 			cubesTransform[i] = tempCube.GetComponent<Transform>();
 			//Make the cube a child of this game object
 			cubesTransform[i].parent = goTransform;
 		}
+
+		//aSource.PlayDelayed (2.0f);
+		aSource.Play ();
+
 	}
 	
 	void Update () 
